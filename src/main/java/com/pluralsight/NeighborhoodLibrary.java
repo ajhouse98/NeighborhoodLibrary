@@ -1,18 +1,81 @@
 package com.pluralsight;
 
+import java.util.Scanner;
+
 public class NeighborhoodLibrary {
     public static void main(String[] args) {
 
-        /**Step 1 - get some books
-         * Declare a class (data type) to represent a Book
-         * Create some books
-         * Declare a variable to hold the books
-         * Let's do an array
-         * Create intances
-         */
+        // Step 1 - get some books
+        //  Declare a class (data type) to represent a Book
+        //  Create some books
+        //  Declare a variable to hold the books
+        // Let's use an array
+        //  Create instances of Book objects with new
 
-        Book b = new Book();
-        System.out.println(b.title);
+        Book b1 = new Book(1, "Unknown", "Gone With the Wind", false, "Nobody");
+        Book b2 = new Book(2, "Unknown", "Hunger Games Sequel", false, "Nobody");
+        Book b3 = new Book(3, "Unknown", "Wonderland", false, "Nobody");
+        Book b4 = new Book(4, "Unknown", "Think and Grow Rich", false, "Nobody");
+        Book b5 = new Book(5, "Unknown", "Rich Dad Poor Dad", false, "Nobody");
+        Book b6 = new Book(6, "Unknown", "The Compound Effect", false, "Nobody");
+        Book b7 = new Book(7, "Unknown", "Prince of Persia", false, "Nobody");
+        Book b8 = new Book(8, "Unknown", "Divergent Sequel", false, "Nobody");
 
+
+        Book[] books = {
+                b1, b2, b3, b4, b5, b6, b7, b8
+        };
+
+        // Print out a prompt
+        System.out.println("Please pick a book from the following list: \n");
+        // Print out all the books
+        printAllBooks(books);
+
+        // Let the user select one by number
+
+
+
+
+        // Go through the books
+        // Show the book with that number
+
+        boolean found = false;
+
+        while(!found) {
+            System.out.print("\nEnter the id number of the book you want: ");
+            // Read in a number
+            Scanner scanner = new Scanner(System.in);
+            String input = scanner.nextLine();
+            int inputNumber = Integer.parseInt(input);
+
+            Book theBook = findBookById(inputNumber, books);
+            if (theBook != null ) found = true;
+
+            if (found) {
+                System.out.println("I FOUND IT !!!!");
+                System.out.println(theBook);
+
+            } else {
+                System.out.println("Sorry.  I don't have that book id...");
+            }
+        }
     }
+
+
+    static void printAllBooks(Book[] books) {
+        for (Book b : books) {
+            System.out.println(b.getId() + ":  " + b.getTitle());
+        }
+    }
+
+    static Book findBookById(int id, Book[] books) {
+        for (Book b : books) {
+            if (id == b.getId()) {
+                return b;
+            }
+        }
+        return null;
+    }
+
 }
+
